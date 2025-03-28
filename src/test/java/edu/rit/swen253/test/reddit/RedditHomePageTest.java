@@ -44,7 +44,8 @@ class RedditHomePageTest extends AbstractWebTest {
         String searchQuery = "page object model";
         // ensure that the search bar is found
         assertNotNull(homePage.getSearchInput());
-
+        Logger logger = Logger.getLogger(RedditHomePage.class.getName());
+        logger.info("Search query: " + homePage.getSearchInput());
         // search for 'page object model'
         homePage.submitSearch(searchQuery);
         List<RedditSearchResult> searchResults = homePage.getSearchResults();
@@ -53,7 +54,6 @@ class RedditHomePageTest extends AbstractWebTest {
 
         // Log all results
         for (RedditSearchResult result : searchResults) {
-            Logger logger = Logger.getLogger("Search Log");
             logger.info("Have search result Title: " + result.getTitle() + " - Url: " + result.getUrl());
         }
     }

@@ -18,11 +18,12 @@ public class RedditHomePage extends AbstractPage {
 
     public DomElement getSearchInput() {
         // <input type="text" enterkeyhint="search" name="q" maxlength="128" placeholder="Search Reddit" autocomplete="off" inputmode="">
-        return findOnPage(By.cssSelector("input[@placeholder='Search Reddit']"));
+        return findOnPage(By.tagName("faceplate-search-input")).findChildBy(By.xpath("//input[@enterkeyhint='search'*]"));
     }
 
     public void submitSearch(String search) {
         DomElement searchInput = getSearchInput();
+        searchInput.click();
         getSearchInput().sendKeys(search);
         getSearchInput().submit();
     }
