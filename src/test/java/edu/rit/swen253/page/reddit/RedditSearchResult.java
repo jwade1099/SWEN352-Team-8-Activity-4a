@@ -1,7 +1,10 @@
 package edu.rit.swen253.page.reddit;
 
 import edu.rit.swen253.utils.DomElement;
+import edu.rit.swen253.utils.SeleniumUtils;
 import org.openqa.selenium.By;
+
+import java.time.Duration;
 
 /**
  * Representation of a Reddit Search Result
@@ -117,13 +120,16 @@ public class RedditSearchResult {
 
     public RedditSearchResult(final DomElement viewContainer) {
         this.viewContainer = viewContainer;
-        this.link = this.viewContainer.findChildBy(By.cssSelector("a[data-testid='post-title']"));
+        this.link = this.viewContainer.findChildBy(By.tagName("a"));
         // posts have title within aria-label="Title"
         this.resultTitle = this.link.getAttribute("aria-label");
     }
 
      public void clickLink() {
-        link.click();
+        DomElement test = this.viewContainer.getParent();
+        test = test.getParent();
+        System.out.println(test.getTagName());
+        test.click();
      }
 
      public String getUrl() {

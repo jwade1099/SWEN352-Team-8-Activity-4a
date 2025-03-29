@@ -2,12 +2,19 @@ package edu.rit.swen253.page.reddit;
 
 import edu.rit.swen253.page.AbstractPage;
 import edu.rit.swen253.page.sample.RitAreaOfStudyLink;
+import edu.rit.swen253.utils.BrowserType;
 import edu.rit.swen253.utils.DomElement;
+import edu.rit.swen253.utils.SeleniumUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.rit.swen253.utils.SeleniumUtils.getLongWait;
+import static edu.rit.swen253.utils.SeleniumUtils.makeWait;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class RedditHomePage extends AbstractPage {
@@ -17,28 +24,21 @@ public class RedditHomePage extends AbstractPage {
     }
 
     public DomElement getSearchInput() {
-        // <input type="text" enterkeyhint="search" name="q" maxlength="128" placeholder="Search Reddit" autocomplete="off" inputmode="">
-        return findOnPage(By.tagName("faceplate-search-input")).findChildBy(By.xpath("//input[@enterkeyhint='search'*]"));
+        switch (BrowserType.discover()) {
+            case CHROME:
+                return findOnPage(By.tagName("reddit-search-large"));
+            case EDGE:
+                return findOnPage(By.tagName("reddit-search-large"));
+            case FIREFOX:
+                return findOnPage(By.tagName("reddit-search-bar"));
+        }
+        return findOnPage(By.tagName("reddit-search-large"));
     }
 
     public void submitSearch(String search) {
         DomElement searchInput = getSearchInput();
         searchInput.click();
-        getSearchInput().sendKeys(search);
-        getSearchInput().submit();
+        searchInput.sendKeys(search);
+        searchInput.sendKeys(Keys.ENTER);
     }
-
-
-    /**
-     * Method to get a list of Reddit Search Results within the main-content container that reddit serves
-     * containing all posts. This code is kinda fragile as the main-content container will be on home page or a search
-     * page. Ensure searching was done
-     * @return List of reddit search results
-     */
-    public List<RedditSearchResult> getSearchResults() {
-        DomElement mainContent = findOnPage(By.id("main-content"));
-        return findAllOnPage(By.tagName("search-telemetry-tracker")).stream().map(RedditSearchResult::new).toList();
-    }
-
-
 }

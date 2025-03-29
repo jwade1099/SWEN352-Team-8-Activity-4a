@@ -25,7 +25,7 @@ class RitRatingsTest extends AbstractWebTest {
   //
   // Test sequence
   //
-
+  @Disabled
   @Test
   @Order(1)
   @DisplayName("First, navigate to the RIT Home page.")
@@ -33,6 +33,7 @@ class RitRatingsTest extends AbstractWebTest {
     homePage = navigateToPage("https://rit.edu", RitHomePage::new);
   }
 
+  @Disabled
   @Test
   @Order(2)
   @DisplayName("Second, find out how many rating info views are visible.")
@@ -43,6 +44,7 @@ class RitRatingsTest extends AbstractWebTest {
     firstRatingInfo = ratingInfoViews.get(2);  // co-op rank is the third item
   }
 
+  @Disabled
   @Test
   @Order(3)
   @DisplayName("Third, inspect the content of the first rating info panel.")

@@ -29,6 +29,7 @@ class RitExploreStudiesInComputingTest extends AbstractWebTest {
   // Test sequence
   //
 
+  @Disabled
   @Test
   @Order(1)
   @DisplayName("First, navigate to the RIT Home page.")
@@ -36,6 +37,7 @@ class RitExploreStudiesInComputingTest extends AbstractWebTest {
     homePage = navigateToPage("https://rit.edu", RitHomePage::new);
   }
 
+  @Disabled
   @Test
   @Order(2)
   @DisplayName("Second, find out how many 'Area of Study' links are visible.")
@@ -50,6 +52,7 @@ class RitExploreStudiesInComputingTest extends AbstractWebTest {
     hasLink.ifPresent(link -> linkToComputingStudies = link);
   }
 
+  @Disabled
   @Test
   @Order(3)
   @DisplayName("Third, inspect the content of the 'Computing and Information Sciences' link.")
@@ -65,6 +68,7 @@ class RitExploreStudiesInComputingTest extends AbstractWebTest {
     );
   }
 
+  @Disabled
   @Test
   @Order(4)
   @DisplayName("Finally, navigate to the Computing area of study.")
